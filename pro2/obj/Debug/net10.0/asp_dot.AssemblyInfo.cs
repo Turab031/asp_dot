@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("asp_dot")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a60562ceef17c89cfe2b5a0dd60e03f77b9b8117")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+178a7affd0f5c23f7e59ffe917f8c62199cefcca")]
 [assembly: System.Reflection.AssemblyProductAttribute("asp_dot")]
 [assembly: System.Reflection.AssemblyTitleAttribute("asp_dot")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

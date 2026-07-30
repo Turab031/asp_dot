@@ -1,6 +1,10 @@
+using Microsoft.EntityFrameworkCore;
+using pro2.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddEndpointsApiExplorer();
+// builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("MyConnection")));
+builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("MyConnection")));
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 
