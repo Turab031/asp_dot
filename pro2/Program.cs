@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using pro2.Data;
+using pro2.IService;
+using pro2.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("MyConnection")));
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
+
+builder.Services.AddScoped<IAuthService,AuthService>();
 
 var app = builder.Build();
 
