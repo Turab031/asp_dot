@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using pro2.Dto;
 using pro2.GenericsResponse;
@@ -47,6 +48,33 @@ namespace pro2.Controllers
 
             }
         }
+
+
+        [HttpPost("Register")]
+
+        public async Task<IActionResult>Register([FromForm]UserDto userDto)
+        {
+            try
+            {
+                var result =  await _authService.RegisterUser(userDto);
+                if (result.Item1 == 0)
+                {
+                    return Ok(ResponseResult<string>.Failure(null,result.Item2));
+                }
+                    return Ok(ResponseResult<string>.Success(null,result.Item2));
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+   
+
+
+        
+
 
 
     }
