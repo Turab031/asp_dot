@@ -6,7 +6,7 @@ namespace pro4_rsv.Services
     {
         List<SuperHero> GetSuperHero();
 
-        SuperHero GetHeroById(int id);
+        SuperHero? GetHeroById(int id);
 
         void AddSuperHero(SuperHero hero);
 

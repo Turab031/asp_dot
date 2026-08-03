@@ -1,39 +1,40 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using pro4_rsv.Data;
 using pro4_rsv.Models;
 
 namespace pro4_rsv.Services
 {
     public class SuperHeroService : ISuperHeroService
     {
-        private static List<SuperHero> superhero = new List<SuperHero>
+        private readonly DataContext _datacontext;
+
+        public SuperHeroService(DataContext dataContext)
         {
-            new SuperHero{Id=1,Name="spiderman",FirstName="peter",LastName="parker",Place="new york"},
+            _datacontext = dataContext;
+        }
 
-            new SuperHero{Id=2,Name="batman",FirstName="bruce",LastName="wayne",Place="gothana"},
-            new SuperHero{Id=3,Name="ironman",FirstName="tont",LastName="jr",Place="new york"},
-        };
-
+        // Get all heroes
         public List<SuperHero> GetSuperHero()
         {
-            return superhero;
+            return _datacontext.SuperHeroes.ToList();
         }
 
-        public SuperHero GetHeroById(int id)
+        // Get hero by id
+        public SuperHero? GetHeroById(int id)
         {
-            return superhero.FirstOrDefault(h => h.Id == id);
+            return _datacontext.SuperHeroes.FirstOrDefault(h => h.Id == id);
         }
 
+        // Add hero
         public void AddSuperHero(SuperHero hero)
         {
-            superhero.Add(hero);
+            _datacontext.SuperHeroes.Add(hero);
+            _datacontext.SaveChanges();
         }
 
+        // Update hero
         public void UpdateHero(int id, SuperHero hero)
         {
-            var existingHero = superhero.FirstOrDefault(h => h.Id == id);
+            var existingHero = _datacontext.SuperHeroes.FirstOrDefault(h => h.Id == id);
 
             if (existingHero != null)
             {
@@ -41,16 +42,20 @@ namespace pro4_rsv.Services
                 existingHero.FirstName = hero.FirstName;
                 existingHero.LastName = hero.LastName;
                 existingHero.Place = hero.Place;
+
+                _datacontext.SaveChanges();
             }
         }
 
+        // Delete hero
         public void DeleteHero(int id)
         {
-            var hero = superhero.FirstOrDefault(h => h.Id == id);
+            var hero = _datacontext.SuperHeroes.FirstOrDefault(h => h.Id == id);
 
             if (hero != null)
             {
-                superhero.Remove(hero);
+                _datacontext.SuperHeroes.Remove(hero);
+                _datacontext.SaveChanges();
             }
         }
     }
