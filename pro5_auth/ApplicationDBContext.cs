@@ -13,7 +13,7 @@ namespace pro5_auth
 
         }
 
-        public DbSet<User>users{get;set;}
+        public DbSet<UserModel>UserModels{get;set;}
 
     }
 }

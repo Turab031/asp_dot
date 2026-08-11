@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("pro5_auth")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+17d99c5f51b0eb9d49a55da8bb8bd5b561f6859c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+35b41cc0c03a72ea2d8ee55023cce54ce465af3f")]
 [assembly: System.Reflection.AssemblyProductAttribute("pro5_auth")]
 [assembly: System.Reflection.AssemblyTitleAttribute("pro5_auth")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

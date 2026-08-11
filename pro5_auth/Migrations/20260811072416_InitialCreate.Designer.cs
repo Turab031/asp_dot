@@ -11,8 +11,8 @@ using pro5_auth;
 namespace pro5_auth.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20260809171853_upated-taable")]
-    partial class upatedtaable
+    [Migration("20260811072416_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,7 +24,7 @@ namespace pro5_auth.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("pro5_auth.User", b =>
+            modelBuilder.Entity("pro5_auth.UserModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -50,7 +50,7 @@ namespace pro5_auth.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("users");
+                    b.ToTable("UserModels");
                 });
 #pragma warning restore 612, 618
         }

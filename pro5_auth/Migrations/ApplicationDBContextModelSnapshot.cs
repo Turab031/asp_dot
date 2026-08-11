@@ -21,7 +21,7 @@ namespace pro5_auth.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("pro5_auth.User", b =>
+            modelBuilder.Entity("pro5_auth.UserModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -47,7 +47,7 @@ namespace pro5_auth.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("users");
+                    b.ToTable("UserModels");
                 });
 #pragma warning restore 612, 618
         }
