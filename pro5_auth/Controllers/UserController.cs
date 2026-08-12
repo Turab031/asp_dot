@@ -36,7 +36,7 @@ namespace pro5_auth.Controllers
             try
             {
                 var result = await _userService.Login(loginRequestDto);
-                return Ok(new { messae = "loin done", data = result });
+                return Ok(new { messae = "login done", data = result });
             }
             catch (Exception ex)
             {
