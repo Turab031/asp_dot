@@ -1,0 +1,6 @@
+@pro3_HostAddress = http://localhost:5171
+
+GET {{pro3_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
