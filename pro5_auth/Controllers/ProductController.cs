@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using pro5_auth.DTO;
 using pro5_auth.Services.IServices;
@@ -16,7 +17,8 @@ namespace pro5_auth.Controllers
         }
 
         // GET: api/product
-        [HttpGet]
+        [HttpGet("GetAll")]
+        [Authorize(Roles = "Admin,User")]
         public async Task<IActionResult> GetAll()
         {
             var products = await _productService.GetAll();
@@ -24,7 +26,7 @@ namespace pro5_auth.Controllers
         }
 
         // GET: api/product/1
-        [HttpGet("{id}")]
+        [HttpGet("GetById/{id}")]
         public async Task<IActionResult> GetById(int id)
         {
             var product = await _productService.GetById(id);
@@ -38,7 +40,8 @@ namespace pro5_auth.Controllers
         }
 
         // POST: api/product
-        [HttpPost]
+        [HttpPost("create")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create(ProductCreateDto dto)
         {
             var result = await _productService.Create(dto);
@@ -46,7 +49,8 @@ namespace pro5_auth.Controllers
         }
 
         // PUT: api/product
-        [HttpPut]
+        [HttpPut("Update")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Update(ProductUpdateDto dto)
         {
             var result = await _productService.Update(dto);
@@ -60,7 +64,8 @@ namespace pro5_auth.Controllers
         }
 
         // DELETE: api/product/1
-        [HttpDelete("{id}")]
+        [HttpDelete("Delete/{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id)
         {
             var result = await _productService.Delete(id);

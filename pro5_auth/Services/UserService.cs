@@ -27,20 +27,48 @@ namespace pro5_auth.Services
         }
 
 
+        // public async Task<UserResponseDto> Register(UserRegisterDto userRegisterDto)
+        // {
+        //     var user = new UserModel
+        //     {
+
+        //         Name = userRegisterDto.Name,
+        //         Email = userRegisterDto.Email,
+        //         Username = userRegisterDto.Username,
+        //         Password = userRegisterDto.Password,
+        //         Role = userRegisterDto.Role
+
+
+        //     };
+
+        //     _context.UserModels.Add(user);
+
+        //     await _context.SaveChangesAsync();
+
+        //     return new UserResponseDto
+        //     {
+        //         Id = user.Id,
+        //         Name = user.Name,
+        //         Email = user.Email,
+        //         Username = user.Username,
+
+        //         Role = user.Role
+        //     };
+        // }
+
+
         public async Task<UserResponseDto> Register(UserRegisterDto userRegisterDto)
         {
             var user = new UserModel
             {
-
                 Name = userRegisterDto.Name,
                 Email = userRegisterDto.Email,
                 Username = userRegisterDto.Username,
-                Password = userRegisterDto.Password,
-
+                PasswordHash = BCrypt.Net.BCrypt.HashPassword(userRegisterDto.Password),
+                Role = userRegisterDto.Role
             };
 
             _context.UserModels.Add(user);
-
             await _context.SaveChangesAsync();
 
             return new UserResponseDto
@@ -48,21 +76,62 @@ namespace pro5_auth.Services
                 Id = user.Id,
                 Name = user.Name,
                 Email = user.Email,
-                Username = user.Username
+                Username = user.Username,
+                Role = user.Role
             };
         }
 
+        // public async Task<LoginResponseDto> Login(LoginRequestDto loginRequestDto)
+        // {
+        //     var user = await _context.UserModels.FirstOrDefaultAsync(u => u.Username == loginRequestDto.UserName);
+
+        //     if (user == null)
+        //     {
+        //         throw new Exception("user not found");
+
+        //     }
+
+        //     var token = GenerateToken(user);
+        //     return new LoginResponseDto
+        //     {
+        //         Token = token,
+        //         User = new UserResponseDto
+        //         {
+        //             Id = user.Id,
+        //             Name = user.Name,
+        //             Email = user.Email,
+        //             Username = user.Username,
+        //             Role = user.Role
+
+
+        //         }
+        //     };
+
+        // }
+
+
+
         public async Task<LoginResponseDto> Login(LoginRequestDto loginRequestDto)
         {
-            var user = await _context.UserModels.FirstOrDefaultAsync(u => u.Username == loginRequestDto.UserName);
+            var user = await _context.UserModels
+                .FirstOrDefaultAsync(u => u.Username == loginRequestDto.UserName);
 
             if (user == null)
             {
-                throw new Exception("user not found");
+                throw new Exception("User not found");
+            }
 
+            bool isPasswordValid = BCrypt.Net.BCrypt.Verify(
+                loginRequestDto.Password,
+                user.PasswordHash);
+
+            if (!isPasswordValid)
+            {
+                throw new Exception("Invalid password");
             }
 
             var token = GenerateToken(user);
+
             return new LoginResponseDto
             {
                 Token = token,
@@ -71,14 +140,10 @@ namespace pro5_auth.Services
                     Id = user.Id,
                     Name = user.Name,
                     Email = user.Email,
-                    Username = user.Username
-
-
+                    Username = user.Username,
+                    Role = user.Role
                 }
             };
-
-
-
         }
 
         private string GenerateToken(UserModel user)
@@ -92,8 +157,11 @@ namespace pro5_auth.Services
             {
                 new Claim("Id",user.Id.ToString()),
                 new Claim(ClaimTypes.Name,user.Name),
+                new Claim(ClaimTypes.Role,user.Role),
                 new Claim("UserName",user.Username),
                 new Claim(ClaimTypes.Email,user.Email),
+
+
 
 
 
