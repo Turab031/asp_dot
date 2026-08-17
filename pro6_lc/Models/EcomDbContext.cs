@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore ;
+using Microsoft.EntityFrameworkCore;
 
 namespace pro6_lc.Models
 {
@@ -10,8 +10,9 @@ namespace pro6_lc.Models
 
     {
         public EcomDbContext(DbContextOptions<EcomDbContext> options) : base(options)
-        {
+        { }
 
-        }
+        public DbSet<CategoryModel> CategoryModels { get; set; }
+        public DbSet<ProductModel> ProductModels { get; set; }
     }
 }

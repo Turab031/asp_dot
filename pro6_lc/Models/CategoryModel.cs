@@ -10,10 +10,18 @@ namespace pro6_lc.Models
     [Table("categoryTbl")]
     public class CategoryModel
     {
-        [Key,DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int categoryId{get;set;}
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int categoryId { get; set; }
 
-        
-        
+        [MaxLength(100)]
+
+        public string categoryName { get; set; } = string.Empty;
+        [MaxLength(200)]
+
+        public string categoryLogo { get; set; } = string.Empty;
+
+
+
+
     }
 }
